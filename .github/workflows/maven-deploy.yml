@@ -46,13 +46,17 @@ jobs:
           echo "SONAR_HOST_URL is: $SONAR_HOST_URL"
           echo "SONAR_TOKEN is: [REDACTED]"
 
-      # Step 6: SonarQube Scan
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@v2.2.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
-        run: mvn -X verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=first_sonarqube_project -Dsonar.projectName='first_sonarqube_project'
+
+      - name: Run SonarQube Analysis
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=first_sonarqube_project -Dsonar.projectName='first_sonarqube_project'
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
 
       # Step 7: Publish Artifacts
       - name: Publish Artifacts
