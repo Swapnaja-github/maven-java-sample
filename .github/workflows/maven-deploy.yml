@@ -41,6 +41,11 @@ jobs:
       - name: Copy artifact to staging directory
         run: mkdir staging && cp target/*.jar staging
 
+      - name: Debug SonarQube Variables
+        run: |
+          echo "SONAR_HOST_URL is: $SONAR_HOST_URL"
+          echo "SONAR_TOKEN is: [REDACTED]"
+
       # Step 6: SonarQube Scan
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@v2.2.0
