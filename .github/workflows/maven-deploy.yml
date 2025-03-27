@@ -47,7 +47,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
-          run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=first_sonarqube_project -Dsonar.projectName='first_sonarqube_project'
+        run: mvn -X verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=first_sonarqube_project -Dsonar.projectName='first_sonarqube_project'
 
       # Step 7: Publish Artifacts
       - name: Publish Artifacts
